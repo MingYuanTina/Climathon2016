@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/node_modules/angular-aria/angular-aria.js"></script>
+    <script src="/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="/node_modules/angular-material/angular-material.js"></script>
+    <script src="/node_modules/ngmap/build/scripts/ng-map.js"></script>
+    <link rel="stylesheet" href="/node_modules/angular/angular-csp.css" />
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css" />
+    <script src="/app/root.js"></script>
+    <script src="/app/ParentDashboardCtrl.js"></script>
+    <script src="/app/services/DropOffLocn.service.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCliayGKrLKFirF0taAgavNMNBnM2qsOQA"></script>
+</head>
+
+<style>
+#left
+{
+    float:left;
+    background-color:#075a96;
+    width:20%;
+    height:95vh;
+    overflow:hidden;
+}
+
+#right
+{
+    margin-left:20%;
+    width:80%;
+    height:95vh;
+    overflow:hidden
+}
+
+a
+{
+    color:#FFFFFF;
+    font-size: 25px;
+    text-align:center;
+    text-decoration: none;
+    margin-top:20px;
+    margin-left:20px;
+}
+
+label, button, input
+{
+    width:80%;
+    color:#FFFFFF;
+    font-size: 20px;
+    text-decoration:none;
+    margin-left:20px;
+}
+
+div[class="link"]
+{
+    height:8%;
+}
+div.link:hover
+{
+    cursor: pointer;
+}
+
+div[class="link"]:hover
+{
+    background-image: -webkit-linear-gradient(top, #1f63d9, #0052cc);
+    background-image: -moz-linear-gradient(top, #1f63d9, #0052cc);
+    background-image: -ms-linear-gradient(top, #1f63d9, #0052cc);
+    background-image: -o-linear-gradient(top, #1f63d9, #0052cc);
+    background-image: linear-gradient(to bottom, #1f63d9, #0052cc);
+}
+
+</style>
+
+<body ng-app="RideAlong">
+    <div id="container">
+        <div id="left" style="display: inline;">
+            <div style="margin-left:20px; height:10%">
+                <label style="margin-left:0px; font-size:40px;">Home</label>
+            </div>
+            <div class="link">
+                <a href="/views/parentDashboardPost.html">Post Ride</a>
+            </div>
+            <div class="link">
+                <a href="/views/parentDashboardSearch.html">Search Ride</a>
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script>
+    function getLink(path)
+    {
+        var x = document.getElementById("content");
+        var att = document.createAttribute("src");
+        att.value = path
+        x.setAttributeNode(att);
+    }
+    function getLink(path)
+    {
+        var x = document.getElementById("content");
+        var att = document.createAttribute("src");
+        att.value = path
+        x.setAttributeNode(att);
+    }
+
+    angular.module('ngMap').run(function($rootScope) {
+        $rootScope.directions = [{
+            panelName: "p1"
+        }];
+    });
+    </script>
+</body>
+</html>
