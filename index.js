@@ -47,16 +47,19 @@ app.get("/api/login/", function(req, res) {
     res.send(db.validateUser(req.params.userName, req.params.password));
 });
 
-app.post("/api/addRoute", function (req, res) {
-
+app.get("/api/addRoute", function (req, res) {
   sampleRouteList.push(
     {
-      driver: req.body.name,
-      seats: req.body.seats,
-      startLoc: req.body.start,
-      destLoc: req.body.dest,
+      driver: req.query.driver,
+      seats: req.query.seats,
+      startLoc: req.query.startLoc,
+      destLoc: req.query.destLoc,
     }
   );
+
+  console.log(sampleRouteList);
+
+  return res.send(sampleRouteList);
 
 });
 

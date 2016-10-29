@@ -88,17 +88,14 @@
             <div style="margin-left:20px; height:10%">
                 <label style="margin-left:0px; font-size:40px;">Home</label>
             </div>
+
             <div class="link">
-                <a onclick="getLink('/view/form.html')">Profile</a>
-            </div>
-            <div class="link">
-                <a onclick="getInput()">Post Ride</a>
-            </div>
-            <div class="link">
-                <a onclick="getInput()">Search Ride</a>
+                <a href="/views/parentDashboardSearch.html">Search Ride</a>
             </div>
             <hr>
             <form>
+              <h1 class="text-center" style="color:white;">Post a Ride</h1>
+
               <div class="form-group col-sm-10">
                 <label for="parentName">Parent Name</label>
                 <input id="parentName" class="form-control" ng-model="parentName">
@@ -129,8 +126,13 @@
             <ng-map style="height:100vh"
                     center="{{origin || 'current-position'}}" zoom="13"
                     map-initialized="mycallback(map)">
-                <marker ng-show="p.show" ng-repeat="p in destArr" position="{{p.latLng}}" on-click="selectDest(p)"></marker>
-                <marker ng-show="{{q.show}}" ng-repeat="q in routeList" position="{{p.startLoc}}" on-click="selectStart()"></marker>
+                    <directions draggable="false"
+                        travel-mode="DRIVING"
+                        panel=""
+                        origin="{{origin}}"
+                        destination="{{destination}}"
+                        ng-show="showDirections">
+                    </directions>
             </ng-map>
           </div>
         </div>

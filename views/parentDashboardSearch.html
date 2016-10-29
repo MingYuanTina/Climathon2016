@@ -82,23 +82,7 @@ div[class="link"]:hover
                 <label style="margin-left:0px; font-size:40px;">Home</label>
             </div>
             <div class="link">
-                <a onclick="getLink('/view/form.html')">Profile</a>
-            </div>
-            <div class="link">
-                <a onclick="getInput()">Post Ride</a>
-            </div>
-            <div class="link">
-                <a onclick="getInput()">Search Ride</a>
-            </div>
-            <div>
-                <form action="action_page.php">
-                    <label>From</label>
-                    <input places-auto-complete ng-model="from" size="80" component-restrictions="{country:'ca'}" on-place-changed="fromChanged()" style="color:#000000">
-                    <br />
-                    <label>To</label>
-                    <input places-auto-complete ng-model="to" size="80" component-restrictions="{country:'ca'}" on-place-changed="toChanged()" style="color:#000000">
-                    <!--<button style="background-color:#1f63d9;" onclick="renderLocation()">Submit</a>-->
-              </form>
+                <a href="/views/parentDashboardPost.html">Post Ride</a>
             </div>
             <div>
                 <p ng-click="clearDest()">

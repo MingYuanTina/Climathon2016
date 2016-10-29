@@ -5,7 +5,7 @@ body {
   background-color: #075a96;
 }
 
-input[type=text], select {
+input[type=text],input[type=password], select {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -52,19 +52,21 @@ label
 
 </style>
 <body>
-<div  style="margin-top:10%;margin-left:20%;width:50%">
+<div  style="margin-top:10%;margin-left:25%;width:50%">
   <form action="action_page.php">
-    <label style="font-size:25px; margin:40%">Admin Login</label>
+    <label style="font-size:25px; margin:40%">Profile Login</label>
     </br>
-    <label>UserName</label>
-    <input type="text" name="firstname">
+    <label>Email</label>
+    <input type="text" name="firstname" placeholder="enter email">
 
     <label>Password</label>
-    <input type="text" name="lastname">
+    <input type="password" name="lastname" placeholder="enter password">
 
     <div>
         <a type="submit" href="/views/parentDashboard.html">Submit</a>
+        <a type="submit" href="/views/form.html" style="margin-left:10px;">Signup</a>
     </div>
+
   </form>
 </div>
 
