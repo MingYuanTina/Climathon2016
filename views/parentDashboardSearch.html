@@ -100,10 +100,15 @@ div[class="link"]:hover
                     <!--<button style="background-color:#1f63d9;" onclick="renderLocation()">Submit</a>-->
               </form>
             </div>
+            <div>
+                <p ng-click="clearDest()">
+                    Selected Dest: {{(destination.latLng) ? destination.latLng.toString() : "none"}}
+                </p>
+            </div>
         </div>
     </div>
     <div id="right">
-        <div ng-app="ngMap">
+        <div>
             <div ng-repeat="dir in directions">
                 <div style="width: 68%; float:left;">
                     <ng-map style="height:95vh"
@@ -116,8 +121,8 @@ div[class="link"]:hover
                             destination="{{destination.latLng}}"
                             ng-show="showDirections">
                         </directions>
-                        <marker ng-if="p.show" ng-repeat="p in destArr" position="{{p.latLng}}" on-click="selectDest(p)"></marker>
-                        <marker ng-if="q.show" ng-repeat="q in routeList" position="{{p.startLoc}}" on-click="selectStart()"></marker>
+                        <marker ng-repeat="p in destArr" position="{{p.latLng}}" on-click="selectDest(p)"></marker>
+                        <marker ng-repeat="q in routeList" position="{{q.startLoc}}" on-click="selectStart(q)"></marker>
                     </ng-map>
                 </div>
 
