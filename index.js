@@ -21,6 +21,8 @@ var sampleRouteList = [
     }
 ];
 
+
+
 app.use(express.static(__dirname + '/'));
 app.use(express.static(__dirname + '/node_modules/'));
 app.use(express.static(__dirname + '/app/'));
@@ -43,6 +45,19 @@ var db = {
 // checks DB to validate userName and password
 app.get("/api/login/", function(req, res) {
     res.send(db.validateUser(req.params.userName, req.params.password));
+});
+
+app.post("/api/addRoute", function (req, res) {
+
+  sampleRouteList.push(
+    {
+      driver: req.body.name,
+      seats: req.body.seats,
+      startLoc: req.body.start,
+      destLoc: req.body.dest,
+    }
+  );
+
 });
 
 function calcDistance(loc1, loc2) {
