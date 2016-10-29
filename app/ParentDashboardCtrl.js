@@ -2,21 +2,7 @@ var app = angular.module("RideAlong");
 
 app.controller("ParentDashboardSearchCtrl", ["$scope", "DropOffLocnService", "$http", "NavigatorGeolocation",
 function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
-    var allDestArr = [
-        {
-            latLng: [43.730849, -79.577471],
-            show: true
-        }, {
-            latLng: [43.725918, -79.566472],
-            show: true
-        }, {
-            latLng: [43.726158, -79.561762],
-            show: true
-        }, {
-            latLng: [43.7286572,-79.5685916],
-            show: true
-        }
-    ];
+    var allDestArr = [];
     var allDepartArr = [];
 
     // all other routes match this format
@@ -24,18 +10,42 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
     $scope.origin = "current-position";
     $scope.startLoc = []; // user's position according to browser
     $scope.departLoc = {}; // user's selected departure location for the route
-    $scope.showDirections = false;
+    $scope.directions = [];
 
     NavigatorGeolocation.getCurrentPosition().then(function(position) {
         $scope.startLoc = [position.coords.latitude, position.coords.longitude];
         console.log($scope.startLoc);
+
+        $http.get("/api/routeList", {
+            params: {
+                destLoc: "0"+ "," + "0",
+                startLoc: $scope.startLoc[0] + "," + $scope.startLoc[1]
+            }
+        }).then(function(response) {
+            var tmpArray = response.data;
+            for (var elemNum in  tmpArray) {
+                var current = {
+                    latLng: tmpArray[elemNum].destLoc
+                };
+                var index = allDestArr.find(compare);
+                if (typeof(index) === 'undefined') allDestArr.push(current);
+            }
+
+            $scope.destArr = allDestArr.slice();
+            function compare(elem) {
+                return elem.latLng[0] == current.latLng[0] && elem.latLng[1] == current.latLng[1];
+            }
+        }, function(error) {
+            console.log("an error occurred getting the routeList from the server");
+        });
+
     }, function(error) {
         console.log("cannot get current location");
     });
 
     $scope.destination = [];
     $scope.schoolLoc = [43.7286572,-79.5685916];
-    $scope.destArr = allDestArr.slice();
+    $scope.destArr = [];
     $scope.routeList = [];
 
     var dest = []; // stores selected destination
@@ -93,8 +103,10 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
         var newArray = [];
         for (var routeElem in allDepartArr) {
             if (Object.keys($scope.destination).length !== 0 &&
+                $scope.destination.latLng[0] == allDepartArr[routeElem].destLoc[0] &&
+                $scope.destination.latLng[1] == allDepartArr[routeElem].destLoc[1] &&
                 (Object.keys($scope.departLoc).length === 0 ||
-                allDepartArr[routeElem] == $scope.departLoc));
+                allDepartArr[routeElem].startLoc == $scope.departLoc))
             newArray.push(allDepartArr[routeElem]);
         }
         $scope.routeList = newArray;
@@ -102,6 +114,25 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
 
     $scope.clearDest = function() {
         $scope.destination = {};
+        $scope.departLoc = {};
+        $scope.directions = [];
+        showHideDest();
+        showHideDepart();
+    };
+
+    $scope.selectStart = function(e, startMarker) {
+        $scope.departLoc = startMarker.startLoc;
+        showHideDepart();
+        $scope.directions = [];
+        $scope.directions.push({
+            startLoc: startMarker.startLoc,
+            destLoc: startMarker.destLoc
+        });
+    };
+
+    $scope.clearStart = function() {
+        $scope.departLoc = {};
+        $scope.directions = [];
         showHideDest();
         showHideDepart();
     };

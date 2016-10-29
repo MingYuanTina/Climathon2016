@@ -86,32 +86,37 @@ div[class="link"]:hover
             </div>
             <div>
                 <p ng-click="clearDest()">
-                    Selected Dest: {{(destination.latLng) ? destination.latLng.toString() : "none"}}
+                    Selected Destination: {{(destination.latLng) ? destination.latLng.toString() : "none"}}
+                    <br />
+                    Click here to clear selected destination
+                </p>
+                <p ng-click="clearStart()">
+                    Selected Depart: {{(departLoc) ? departLoc.toString() : "none"}}
+                    <br />
+                    Click here to clear selected depart location
                 </p>
             </div>
         </div>
     </div>
     <div id="right">
         <div>
-            <div ng-repeat="dir in directions">
-                <div style="width: 68%; float:left;">
-                    <ng-map style="height:95vh"
-                            center="{{origin}}" zoom="15"
-                            map-initialized="mycallback(map)">
-                        <directions draggable="false"
-                            travel-mode="DRIVING"
-                            panel="{{dir.panelName}}"
-                            origin="{{origin}}"
-                            destination="{{destination.latLng}}"
-                            ng-show="showDirections">
-                        </directions>
-                        <marker ng-repeat="p in destArr" position="{{p.latLng}}" on-click="selectDest(p)"></marker>
-                        <marker ng-repeat="q in routeList" position="{{q.startLoc}}" on-click="selectStart(q)"></marker>
-                    </ng-map>
-                </div>
+            <div style="width: 68%; float:left;">
+                <ng-map style="height:95vh"
+                        center="{{origin}}" zoom="15"
+                        map-initialized="mycallback(map)">
+                    <directions ng-repeat="dir in directions"
+                        draggable="false"
+                        travel-mode="DRIVING"
+                        panel="dir-panel"
+                        origin="{{dir.startLoc}}"
+                        destination="{{dir.destLoc}}">
+                    </directions>
+                    <marker ng-repeat="p in destArr" position="{{p.latLng}}" on-click="selectDest(p)"></marker>
+                    <marker ng-repeat="q in routeList" position="{{q.startLoc}}" on-click="selectStart(q)"></marker>
+                </ng-map>
+            </div>
 
-                <div id="{{dir.panelName}}" style="width: 32%; float:left; height:450px">
-                </div>
+            <div id="dir-panel" style="width: 32%; float:left; height:450px">
             </div>
         </div>
     </div>

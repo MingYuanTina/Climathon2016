@@ -7,17 +7,32 @@ var sampleRouteList = [
         driver: "some guy",
         spaces: 3,
         startLoc: [43.730849, -79.577471],
-        destLoc: [43.748481, -79.328680]
+            destLoc: [43.729797, -79.569247]
     }, {
         driver: "some guy2",
         spaces: 2,
         startLoc: [43.725918, -79.566472],
-        destLoc: [43.748481, -79.328680]
+        destLoc: [43.729797, -79.569247]
     }, {
         driver: "some guy3",
         spaces: 1,
-        startLoc: [43.726158, -79.561762],
-        destLoc: [43.748481, -79.328680]
+        startLoc: [43.732111, -79.561827],
+        destLoc: [43.729797, -79.569247]
+    }, {
+        driver: "some guy4",
+        spaces: 1,
+        startLoc: [43.732111, -79.561827],
+        destLoc: [43.727447, -79.562388]
+    }, {
+        driver: "some guy5",
+        spaces: 1,
+        startLoc: [43.725865, -79.568505],
+        destLoc: [43.727447, -79.562388]
+    }, {
+        driver: "some guy6",
+        spaces: 1,
+        startLoc: [43.722321, -79.563684],
+        destLoc: [43.727447, -79.562388]
     }
 ];
 
