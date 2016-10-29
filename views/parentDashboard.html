@@ -15,6 +15,26 @@
     <script src="/app/root.js"></script>
     <script src="/app/ParentDashboardCtrl.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCliayGKrLKFirF0taAgavNMNBnM2qsOQA&callback=initMap" ></script>
+
+    <script>
+      function getLink(path)
+      {
+        var x = document.getElementById("content");
+        var att = document.createAttribute("src");
+        att.value = path
+        x.setAttributeNode(att);
+      }
+
+      angular.module('ngMap').run(function($rootScope) {
+          $rootScope.directions = [{
+            origin: "Toronto",
+            destination: "Gilroy",
+            panelName: "p1"
+          }];
+        });
+    </script>
+
+
 </head>
 
 <style>
@@ -70,31 +90,33 @@ div[class="link"]:hover
                 <a onclick="getLink('/view/Profile.html')">Profile</a>
             </div>
             <div class="link">
-                <a onclick="getLink('/views/postRide.html')">Post Ride</a>
+                <a onclick="getInput()">Post Ride</a>
             </div>
             <div class="link">
-                <a onclick="getLink('/views/searchRide.html')">Search Ride</a>
+                <a onclick="getInput()">Search Ride</a>
             </div>
         </div>
-
-        <ng-map center="43.644541, 79.395172" zoom="4"></ng-map>
     </div>
-<script>
-        <div id="right">
-            <iframe id="content"
-            style="border:0; height:100%;width:100%">
-        </iframe>
-    </div>
-</div>
 
-<script>
-  function getLink(path)
-  {
-    var x = document.getElementById("content");
-    var att = document.createAttribute("src");
-    att.value = path
-    x.setAttributeNode(att);
-  }
-</script>
+    <div id="right">
+        <div ng-app="ngMap">
+            <div ng-repeat="dir in directions">
+
+              <div style="width: 68%; float:left;">
+                <ng-map style="height:95vh">
+                  <directions draggable="false" 
+                              travel-mode="DRIVING"
+                              panel="{{dir.panelName}}" 
+                              origin="{{dir.origin}}" 
+                              destination="{{dir.destination}}">
+                  </directions>
+                </ng-map>
+              </div>
+
+              <div id="{{dir.panelName}}" style="width: 32%; float:left; height:450px">  
+              </div>
+            </div>
+          </div>
+    </div>
 </body>
 </html>
