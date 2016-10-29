@@ -1,5 +1,32 @@
 <!DOCTYPE html>
 <html>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+  function addChild()
+  {
+    var tag = document.getElementById("add_child");
+    var x = document.createAttribute("div");
+    tag.appendChild(x);
+  }
+
+  //<div>
+    //First Name<input type="text"><br>
+    //Last Name <input type="text"><br>
+    //School year <input type="text"><br>
+  //</div>
+  //var element = '<div>'
++  'First Name<input type="text"><br>'
++  'Last Name <input type="text"><br>'
++  'School year <input type="text"><br>'
++ '</div>';
+  //$(function(){
+
+  //$("#add_child").click(function(){
+    //$("#children_at_school").append(element);
+  //});
+//});
+</script>
 <style>
 body {
   background-color: #075a96;
@@ -61,7 +88,68 @@ label
 
     <label>Password</label>
     <input type="text" name="lastname">
-
+    Photo: <input type="text">
+    <br>
+    Name: <input type="text">
+    <br>
+    Address: <input type="text">
+    <br>
+    Postal Code: <input type="text">
+    <br>
+    Phone: <input type="text">
+    <br>
+    Email: <input type="text">
+    <br>
+    Available to Drive:
+    <input type="radio" name="availability" value="yes" checked> Yes
+    <input type="radio" name="availability" value="no"> No <br>
+    Type of car:
+    <select name="car">
+      <option value="car">Car</option>
+      <option value="suv">SUV</option>
+      <option value="truck">Truck</option>
+      <option value="van">Van</option>
+      <option value="minivan">Minivan</option>
+    </select>
+    <br>
+    # of available seats:
+    <select name="seats" id="">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+    </select>
+    <br>
+    My child(children) will utilize carpool:
+    <input type="radio" name="utilize" value="yes" checked> Yes
+    <input type="radio" name="utilize" value="no"> No
+    <br>
+    My child currently (check all that apply):
+    <br>
+    <input type="checkbox" name="current_method" value="car"> Gets driven to school <br>
+    <input type="checkbox" name="current_method" value="schoolBus"> Takes a school bus <br>
+    <input type="checkbox" name="current_method" value="transit"> Takes public transit <br>
+    <input type="checkbox" name="current_method" value="walks"> Walks to school <br>
+    <input type="checkbox" name="current_method" value="cycle"> Cycles to school <br>
+    # of children at school:
+    <select name="seats" id="seats">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+    </select>
+    <br>
+    <div id="children_at_school">
+      <div>
+        First Name<input type="text"><br>
+        Last Name <input type="text"><br>
+        School year <input type="text"><br>
+      </div>
+      <button id="add_child" onclick="addChild()">+ Add Child</button>
+    </div>
     <div>
         <a type="submit" href="/views/parentDashboard.html">Submit</a>
     </div>
