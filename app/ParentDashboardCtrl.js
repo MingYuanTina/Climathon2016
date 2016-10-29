@@ -2,28 +2,7 @@ var app = angular.module("RideAlong");
 
 app.controller("ParentDashboardSearchCtrl", ["$scope", "DropOffLocnService", "$http", "NavigatorGeolocation",
 function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
-    var allDestArr = [
-        {
-            latLng: [43.729797, -79.569247],
-        }, {
-            latLng: [43.727447, -79.562388],
-        }
-    ];
-    //$http.get("/api/routeList", {
-    //    params: {
-    //        destLoc: $scope.destination.latLng[0] + "," + $scope.destination.latLng[1],
-    //        startLoc: $scope.startLoc[0] + "," + $scope.startLoc[1]
-    //    }
-    //}).then(function(response) {
-    //    console.log("successfully got routeList");
-    //    console.log(response.data);
-    //    allDepartArr = response.data;
-    //    showHideDest();
-    //    showHideDepart();
-    //}, function(error) {
-    //    console.log("an error occurred getting the routeList from the server");
-    //});
-
+    var allDestArr = [];
     var allDepartArr = [];
 
     // all other routes match this format
@@ -36,13 +15,37 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
     NavigatorGeolocation.getCurrentPosition().then(function(position) {
         $scope.startLoc = [position.coords.latitude, position.coords.longitude];
         console.log($scope.startLoc);
+
+        $http.get("/api/routeList", {
+            params: {
+                destLoc: "0"+ "," + "0",
+                startLoc: $scope.startLoc[0] + "," + $scope.startLoc[1]
+            }
+        }).then(function(response) {
+            var tmpArray = response.data;
+            for (var elemNum in  tmpArray) {
+                var current = {
+                    latLng: tmpArray[elemNum].destLoc
+                };
+                var index = allDestArr.find(compare);
+                if (typeof(index) === 'undefined') allDestArr.push(current);
+            }
+
+            $scope.destArr = allDestArr.slice();
+            function compare(elem) {
+                return elem.latLng[0] == current.latLng[0] && elem.latLng[1] == current.latLng[1];
+            }
+        }, function(error) {
+            console.log("an error occurred getting the routeList from the server");
+        });
+
     }, function(error) {
         console.log("cannot get current location");
     });
 
     $scope.destination = [];
     $scope.schoolLoc = [43.7286572,-79.5685916];
-    $scope.destArr = allDestArr.slice();
+    $scope.destArr = [];
     $scope.routeList = [];
 
     var dest = []; // stores selected destination
