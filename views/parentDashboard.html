@@ -15,7 +15,7 @@
     <script src="/app/root.js"></script>
     <script src="/app/ParentDashboardCtrl.js"></script>
     <script src="/app/services/DropOffLocn.service.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCliayGKrLKFirF0taAgavNMNBnM2qsOQA"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyCliayGKrLKFirF0taAgavNMNBnM2qsOQA"></script>
 </head>
 
 <style>
@@ -40,14 +40,28 @@ a
 {
     color:#FFFFFF;
     font-size: 25px;
+    text-align:center;
     text-decoration: none;
     margin-top:20px;
+    margin-left:20px;
+}
+
+label, button, input
+{
+    width:80%;
+    color:#FFFFFF;
+    font-size: 20px;
+    text-decoration:none;
     margin-left:20px;
 }
 
 div[class="link"]
 {
     height:8%;
+}
+div.link:hover
+{
+    cursor: pointer;
 }
 
 div[class="link"]:hover
@@ -64,11 +78,11 @@ div[class="link"]:hover
 <body ng-app="RideAlong" ng-controller="ParentDashboardCtrl">
     <div id="container">
         <div id="left" style="display: inline;">
-            <div style="margin-left:20px; color:#FFFFFF; font-size:40px; height:10%">
-                <label>Home</label>
+            <div style="margin-left:20px; height:10%">
+                <label style="margin-left:0px; font-size:40px;">Home</label>
             </div>
             <div class="link">
-                <a onclick="getLink('/view/Profile.html')">Profile</a>
+                <a onclick="getLink('/view/form.html')">Profile</a>
             </div>
             <div class="link">
                 <a onclick="getInput()">Post Ride</a>
@@ -76,21 +90,32 @@ div[class="link"]:hover
             <div class="link">
                 <a onclick="getInput()">Search Ride</a>
             </div>
+            <div>
+                <form action="action_page.php">
+                    <label>From</label>
+                    <input places-auto-complete ng-model="from" size=80 component-restrictions="{country:'ca'}" on-place-changed="fromChanged()" style="color:#000000">
+                    </br>
+                    <label>To</label>
+                    <input places-auto-complete ng-model="to" size=80 component-restrictions="{country:'ca'}" on-place-changed="toChanged()" style="color:#000000">
+                    <!--<button style="background-color:#1f63d9;" onclick="renderLocation()">Submit</a>-->
+              </form>
+            </div>
         </div>
     </div>
     <div id="right">
         <div ng-app="ngMap">
             <div ng-repeat="dir in directions">
-
                 <div style="width: 68%; float:left;">
-                    <ng-map style="height:95vh" center="43.748481, -79.328680" zoom="16">
+                    <ng-map style="height:95vh"
+                            center="[43.7286572,-79.5685916]" zoom="15"
+                            map-initialized="mycallback(map)">
                         <directions draggable="false"
                             travel-mode="DRIVING"
                             panel="{{dir.panelName}}"
-                            origin="{{dir.origin}}"
-                            destination="{{dir.destination}}">
+                            origin="{{origin}}"
+                            destination="{{destination}}">
                         </directions>
-                        <marker position="{{marker}}" ng-repeat="marker in dropOffLocns" on-click="selectDest({{marker}})"></marker>
+                        <marker ng-repeat="p in locArr" position="{{p}}" on-click="selectDest()"></marker>
                     </ng-map>
                 </div>
 
@@ -118,8 +143,6 @@ div[class="link"]:hover
 
     angular.module('ngMap').run(function($rootScope) {
         $rootScope.directions = [{
-            origin: "Toronto",
-            destination: "Gilroy",
             panelName: "p1"
         }];
     });
