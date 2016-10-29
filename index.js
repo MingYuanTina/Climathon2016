@@ -5,6 +5,7 @@ var app = express();
 app.use(express.static(__dirname + '/'));
 app.use(express.static(__dirname + '/node_modules/'));
 app.use(express.static(__dirname + '/app/'));
+app.use(express.static(__dirname + '/views/'));
 
 // link to DB (currently not implemented)
 var db = {

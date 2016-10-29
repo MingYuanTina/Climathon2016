@@ -1,1 +1,1 @@
-var app = angular.module("RideAlong", []);
+var app = angular.module("RideAlong", ["ngMap"]);

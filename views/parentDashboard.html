@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6Bz9_MKuggY8ECg3-Xa7E0oAxX1jpMGI&callback=initMap" async defer></script>
-    <script src="../node_modules/angular/angular.js"></script>
-    <script src="../node_modules/angular-aria/angular-aria.js"></script>
-    <script src="../node_modules/angular-animate/angular-animate.js"></script>
-    <script src="../node_modules/angular-material/angular-material.js"></script>
-    <link rel="stylesheet" href="../node_modules/angular/angular-csp.css" />
-    <link rel="stylesheet" href="../node_modules/angular-material/angular-material.css" />
-    <script src="root.js"></script>
-    <script src="ParentDashboardCtrl.js"></script>
+    <script src="/node_modules/angular/angular.js"></script>
+    <script src="/node_modules/angular-aria/angular-aria.js"></script>
+    <script src="/node_modules/angular-animate/angular-animate.js"></script>
+    <script src="/node_modules/angular-material/angular-material.js"></script>
+    <script src="/node_modules/ngmap/build/scripts/ng-map.js"></script>
+    <link rel="stylesheet" href="/node_modules/angular/angular-csp.css" />
+    <link rel="stylesheet" href="/node_modules/angular-material/angular-material.css" />
+    <script src="/app/root.js"></script>
+    <script src="/app/ParentDashboardCtrl.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCliayGKrLKFirF0taAgavNMNBnM2qsOQA&callback=initMap" ></script>
 </head>
 
 <style>
@@ -59,9 +60,9 @@ div[class="link"]:hover
 
 </style>
 
-<body>
+<body ng-app="RideAlong" ng-controller="ParentDashboardCtrl">
     <div id="container">
-        <div id="left">
+        <div id="left" style="display: inline;">
             <div style="margin-left:20px; color:#FFFFFF; font-size:40px; height:10%">
                 <label>Home</label>
             </div>
@@ -76,18 +77,9 @@ div[class="link"]:hover
             </div>
         </div>
 
-        <div id="right">
-            <iframe id="content"
-            src="http://www.w3schools.com/"
-            style="border:0; height:100%;width:100%">
-        </iframe>
+        <ng-map center="43.644541, 79.395172" zoom="4"></ng-map>
     </div>
-</div>
 <script>
-function getLink(path)
-{
-    document.getElementsById("content").setAttribute("src", path);
-}
 </script>
 </body>
 </html>
