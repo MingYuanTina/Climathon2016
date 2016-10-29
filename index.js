@@ -60,6 +60,7 @@ function calcDistance(loc1, loc2) {
 
 // Returns list of routes, calculates the distance from given locn
 app.get("/api/routeList", function(req, res) {
+    console.log(req.query);
     var startLoc = req.query.startLoc.split(',');
     var destLoc = req.query.destLoc.split(',');
     var routeList = db.getRouteList();
