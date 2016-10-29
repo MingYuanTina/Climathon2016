@@ -4,19 +4,26 @@ app.controller("ParentDashboardSearchCtrl", ["$scope", "DropOffLocnService", "$h
 function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
     var allDestArr = [
         {
-            latLng: [43.730849, -79.577471],
-            show: true
+            latLng: [43.729797, -79.569247],
         }, {
-            latLng: [43.725918, -79.566472],
-            show: true
-        }, {
-            latLng: [43.726158, -79.561762],
-            show: true
-        }, {
-            latLng: [43.7286572,-79.5685916],
-            show: true
+            latLng: [43.727447, -79.562388],
         }
     ];
+    //$http.get("/api/routeList", {
+    //    params: {
+    //        destLoc: $scope.destination.latLng[0] + "," + $scope.destination.latLng[1],
+    //        startLoc: $scope.startLoc[0] + "," + $scope.startLoc[1]
+    //    }
+    //}).then(function(response) {
+    //    console.log("successfully got routeList");
+    //    console.log(response.data);
+    //    allDepartArr = response.data;
+    //    showHideDest();
+    //    showHideDepart();
+    //}, function(error) {
+    //    console.log("an error occurred getting the routeList from the server");
+    //});
+
     var allDepartArr = [];
 
     // all other routes match this format
@@ -93,6 +100,8 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
         var newArray = [];
         for (var routeElem in allDepartArr) {
             if (Object.keys($scope.destination).length !== 0 &&
+                $scope.destination.latLng[0] == allDepartArr[routeElem].destLoc[0] &&
+                $scope.destination.latLng[1] == allDepartArr[routeElem].destLoc[1] &&
                 (Object.keys($scope.departLoc).length === 0 ||
                 allDepartArr[routeElem].startLoc == $scope.departLoc))
             newArray.push(allDepartArr[routeElem]);
@@ -102,6 +111,8 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
 
     $scope.clearDest = function() {
         $scope.destination = {};
+        $scope.departLoc = {};
+        $scope.directions = [];
         showHideDest();
         showHideDepart();
     };
