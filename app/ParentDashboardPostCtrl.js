@@ -4,40 +4,40 @@ var app = angular.module("RideAlong");
 app.controller("ParentDashboardPostCtrl", ["$scope", "DropOffLocnService", "$http", "NavigatorGeolocation",
 function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
 
-$scope.parentName = "";
-$scope.seats = "";
+    $scope.parentName = "";
+    $scope.seats = "";
 
 
-  $scope.mycallback = function(map) {
-      $scope.mymap = map;
-      $scope.$apply();
-  };
+    $scope.mycallback = function(map) {
+        $scope.mymap = map;
+        $scope.$apply();
+    };
 
 
 
-  $scope.fromChanged = function() {
-      //console.log(this.getPlace().geometry.location);
-      $scope.origin = this.getPlace().geometry.location;
-      $scope.$apply();
-  };
+    $scope.fromChanged = function() {
+        //console.log(this.getPlace().geometry.location);
+        $scope.origin = this.getPlace().geometry.location;
+        $scope.$apply();
+    };
 
-  $scope.toChanged = function() {
-      //console.log(this.getPlace().geometry.location);
-      $scope.destination = this.getPlace().geometry.location;
-      $scope.$apply();
-  };
+    $scope.toChanged = function() {
+        //console.log(this.getPlace().geometry.location);
+        $scope.destination = this.getPlace().geometry.location;
+        $scope.$apply();
+    };
 
-  $scope.submitPost = function () {
+    $scope.submitPost = function () {
 
-    console.log($scope.parentName);
-    $http.get("/api/addRoute", {params: {
-      driver: $scope.parentName,
-      seats: $scope.seats,
-      startLoc: $scope.origin,
-      destLoc: $scope.destination
-    }}).then(function (data) {
-      console.log(data);
-    })
-  };
+        console.log($scope.parentName);
+        $http.get("/api/addRoute", {params: {
+            driver: $scope.parentName,
+            seats: $scope.seats,
+            startLoc: $scope.origin.lat() + "," + $scope.origin.lng(),
+            destLoc: $scope.destination.lat() + "," + $scope.destination.lng()
+        }}).then(function (data) {
+            console.log(data);
+        });
+    };
 
 }]);

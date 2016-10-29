@@ -7,7 +7,7 @@ var sampleRouteList = [
         driver: "some guy",
         spaces: 3,
         startLoc: [43.730849, -79.577471],
-            destLoc: [43.729797, -79.569247]
+        destLoc: [43.729797, -79.569247]
     }, {
         driver: "some guy2",
         spaces: 2,
@@ -63,18 +63,21 @@ app.get("/api/login/", function(req, res) {
 });
 
 app.get("/api/addRoute", function (req, res) {
-  sampleRouteList.push(
-    {
-      driver: req.query.driver,
-      seats: req.query.seats,
-      startLoc: req.query.startLoc,
-      destLoc: req.query.destLoc,
-    }
-  );
+    var newData = {
+            driver: req.query.driver,
+            seats: req.query.seats,
+            startLoc: req.query.startLoc.split(','),
+            destLoc: req.query.destLoc.split(',')
+        };
+    newData.startLoc[0] = Number(newData.startLoc[0]);
+    newData.startLoc[1] = Number(newData.startLoc[1]);
+    newData.destLoc[0] = Number(newData.destLoc[0]);
+    newData.destLoc[1] = Number(newData.destLoc[1]);
+    sampleRouteList.push(newData);
 
-  console.log(sampleRouteList);
+    console.log(sampleRouteList);
 
-  return res.send(sampleRouteList);
+    return res.send(sampleRouteList);
 
 });
 
@@ -107,5 +110,5 @@ app.get("/api/routeList", function(req, res) {
 
 // app hosted on localhost:3000
 app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
+    console.log('Example app listening on port 3000!');
 });
