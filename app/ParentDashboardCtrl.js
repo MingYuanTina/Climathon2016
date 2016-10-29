@@ -5,7 +5,9 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
     // all other routes match this format
 
     $scope.origin = "current-position";
-    $scope.startLoc = [];
+    $scope.startLoc = []; // user's position according to browser
+    $scope.departLoc = {}; // user's selected departure location for the route
+    $scope.showDirections = false;
 
     NavigatorGeolocation.getCurrentPosition().then(function(position) {
         $scope.startLoc = [position.coords.latitude, position.coords.longitude];
@@ -67,20 +69,23 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
             console.log("successfully got routeList");
             console.log(response.data);
             $scope.routeList = response.data;
+            showHideDest();
         }, function(error) {
             console.log("an error occurred getting the routeList from the server");
         });
     };
 
-    $scope.showHideDest = function() {
+    function showHideDest() {
         for (var destElem in $scope.destArr) {
-            $scope.destArr[destElem].show = $scope.destination.length === 0 ||
+            $scope.destArr[destElem].show = $scope.destination === {} ||
                 $scope.destArr[destElem] == $scope.destination;
         }
-    };
+    }
 
-    $scope.showHideDest = function() {
-        if (destMarker == $scope.destination) return true;
-        return false;
-    };
+    function showHideDep() {
+        for (var routeElem in $scope.routeList) {
+            $scope.destArr[routerElem].show = $scope.departLoc === {} ||
+                $scope.routeList[routeElem] == $scope.departLoc;
+        }
+    }
 }]);
