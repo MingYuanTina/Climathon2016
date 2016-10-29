@@ -71,19 +71,33 @@ div[class="link"]:hover
                 <a onclick="getLink('/view/Profile.html')">Profile</a>
             </div>
             <div class="link">
-                <a onclick="getLink('/views/postRide.html')">Post Ride</a>
+                <a onclick="getInput()">Post Ride</a>
             </div>
             <div class="link">
-                <a onclick="getLink('/views/searchRide.html')">Search Ride</a>
+                <a onclick="getInput()">Search Ride</a>
             </div>
         </div>
-
-        <ng-map center="43.748481, -79.328680" zoom="16">
-            <marker position="{{marker}}" ng-repeat="marker in dropOffLocns" on-click="selectDest({{marker}})"></marker>
-        </ng-map>
     </div>
     <div id="right">
-        <iframe id="content" style="border:0; height:100%;width:100%"></iframe>
+        <div ng-app="ngMap">
+            <div ng-repeat="dir in directions">
+
+                <div style="width: 68%; float:left;">
+                    <ng-map style="height:95vh" center="43.748481, -79.328680" zoom="16">
+                        <directions draggable="false"
+                            travel-mode="DRIVING"
+                            panel="{{dir.panelName}}"
+                            origin="{{dir.origin}}"
+                            destination="{{dir.destination}}">
+                        </directions>
+                        <marker position="{{marker}}" ng-repeat="marker in dropOffLocns" on-click="selectDest({{marker}})"></marker>
+                    </ng-map>
+                </div>
+
+                <div id="{{dir.panelName}}" style="width: 32%; float:left; height:450px">
+                </div>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -94,6 +108,21 @@ div[class="link"]:hover
         att.value = path
         x.setAttributeNode(att);
     }
+    function getLink(path)
+    {
+        var x = document.getElementById("content");
+        var att = document.createAttribute("src");
+        att.value = path
+        x.setAttributeNode(att);
+    }
+
+    angular.module('ngMap').run(function($rootScope) {
+        $rootScope.directions = [{
+            origin: "Toronto",
+            destination: "Gilroy",
+            panelName: "p1"
+        }];
+    });
     </script>
 </body>
 </html>
