@@ -83,14 +83,14 @@ div[class="link"]:hover
             <div ng-repeat="dir in directions">
 
                 <div style="width: 68%; float:left;">
-                    <ng-map style="height:95vh" center="43.748481, -79.328680" zoom="16">
-                        <directions draggable="false"
+                    <ng-map style="height:95vh" center="43.7286572,-79.5685916" zoom="16">
+                      <!--  <directions draggable="false"
                             travel-mode="DRIVING"
                             panel="{{dir.panelName}}"
                             origin="{{dir.origin}}"
                             destination="{{dir.destination}}">
-                        </directions>
-                        <marker position="{{marker}}" ng-repeat="marker in dropOffLocns" on-click="selectDest({{marker}})"></marker>
+                        </directions> -->
+                        <marker ng-repeat="marker in locArr" position="{{marker}}" on-click="selectDest({{marker}})"></marker>
                     </ng-map>
                 </div>
 

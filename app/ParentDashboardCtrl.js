@@ -3,6 +3,11 @@ var app = angular.module("RideAlong");
 app.controller("ParentDashboardCtrl", ["$scope", "DropOffLocnService",
 function($scope, DropOffLocnService) {
     // all other routes match this format
+    var locArr = [
+      [43.730849, -79.577471],
+      [43.725918, -79.566472],
+      [43.726158, -79.561762]
+    ]
     var sampleRoute = {
         driver: "some guy",
         spaces: 3,
