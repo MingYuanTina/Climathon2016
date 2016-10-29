@@ -67,19 +67,34 @@ div[class="link"]:hover
                 <label>Home</label>
             </div>
             <div class="link">
-                <a href="http://www.google.ca">Profile</a>
+                <a onclick="getLink('/view/Profile.html')">Profile</a>
             </div>
             <div class="link">
-                <a href="http://www.google.ca/map">Post Ride</a>
+                <a onclick="getLink('/views/postRide.html')">Post Ride</a>
             </div>
             <div class="link">
-                <a href="getLink('http://www.google.ca/translate')">Search Ride</a>
+                <a onclick="getLink('/views/searchRide.html')">Search Ride</a>
             </div>
         </div>
 
         <ng-map center="43.644541, 79.395172" zoom="4"></ng-map>
     </div>
 <script>
+        <div id="right">
+            <iframe id="content"
+            style="border:0; height:100%;width:100%">
+        </iframe>
+    </div>
+</div>
+
+<script>
+  function getLink(path)
+  {
+    var x = document.getElementById("content");
+    var att = document.createAttribute("src");
+    att.value = path
+    x.setAttributeNode(att);
+  }
 </script>
 </body>
 </html>

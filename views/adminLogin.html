@@ -16,7 +16,7 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-input[type=submit] {
+a[type=submit] {
   background: #075a96;
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
@@ -29,8 +29,12 @@ input[type=submit] {
   text-decoration: none;
 }
 
-input[type=submit]:hover {
-  background-color: #075a96;
+a[type=submit]:hover {
+  background-image: -webkit-linear-gradient(top, #1f63d9, #0052cc);
+  background-image: -moz-linear-gradient(top, #1f63d9, #0052cc);
+  background-image: -ms-linear-gradient(top, #1f63d9, #0052cc);
+  background-image: -o-linear-gradient(top, #1f63d9, #0052cc);
+  background-image: linear-gradient(to bottom, #1f63d9, #0052cc);
   text-decoration: none;
 }
 
@@ -53,12 +57,14 @@ label
     <label style="font-size:25px; margin:40%">Admin Login</label>
     </br>
     <label>UserName</label>
-    <input type="text" id="fname" name="firstname">
+    <input type="text" name="firstname">
 
     <label>Password</label>
-    <input type="text" id="lname" name="lastname">
+    <input type="text" name="lastname">
 
-    <input type="submit" value="Submit" style="background-color:#075a96">
+    <div>
+        <a type="submit" href="/views/parentDashboard.html">Submit</a>
+    </div>
   </form>
 </div>
 
