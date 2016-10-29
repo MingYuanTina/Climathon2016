@@ -1,39 +1,12 @@
 <!DOCTYPE html>
 <html>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-</script>
-<script>
-  function addChild()
-  {
-    var tag = document.getElementById("add_child");
-    var x = document.createAttribute("div");
-    tag.appendChild(x);
-  }
-
-  //<div>
-    //First Name<input type="text"><br>
-    //Last Name <input type="text"><br>
-    //School year <input type="text"><br>
-  //</div>
-  //var element = '<div>'
-+  'First Name<input type="text"><br>'
-+  'Last Name <input type="text"><br>'
-+  'School year <input type="text"><br>'
-+ '</div>';
-  //$(function(){
-
-  //$("#add_child").click(function(){
-    //$("#children_at_school").append(element);
-  //});
-//});
-</script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <style>
 body {
   background-color: #075a96;
 }
 
 input[type=text], select {
-    width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
     font-size:20px;
@@ -43,7 +16,21 @@ input[type=text], select {
     box-sizing: border-box;
 }
 
-a[type=submit] {
+div {
+  border-radius: 5px;
+  background-color:#FFFFFF;
+  padding: 10px;
+}
+
+label
+{
+  width:100px;
+  color:#696969;
+  font-size: 20px;
+  display: inline-block;
+}
+
+button,a {
   background: #075a96;
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
@@ -56,105 +43,140 @@ a[type=submit] {
   text-decoration: none;
 }
 
-a[type=submit]:hover {
-  background-image: -webkit-linear-gradient(top, #1f63d9, #0052cc);
-  background-image: -moz-linear-gradient(top, #1f63d9, #0052cc);
-  background-image: -ms-linear-gradient(top, #1f63d9, #0052cc);
-  background-image: -o-linear-gradient(top, #1f63d9, #0052cc);
-  background-image: linear-gradient(to bottom, #1f63d9, #0052cc);
-  text-decoration: none;
-}
-
-div {
-  border-radius: 5px;
-  background-color:#FFFFFF;
-  padding: 20px;
-}
-
-label
-{
-  color:#696969;
-  font-size: 20px;
-}
-
 </style>
 <body>
-<div  style="margin-top:10%;margin-left:20%;width:50%">
+<div  style="margin-top:3%;margin-left:15%;width:60%">
   <form action="action_page.php">
-    <label style="font-size:25px; margin:40%">Admin Login</label>
-    </br>
-    <label>UserName</label>
-    <input type="text" name="firstname">
+    <label style="font-size:25px; margin:40%; display: inline">Profile Info</label>
 
-    <label>Password</label>
-    <input type="text" name="lastname">
-    Photo: <input type="text">
-    <br>
-    Name: <input type="text">
-    <br>
-    Address: <input type="text">
-    <br>
-    Postal Code: <input type="text">
-    <br>
-    Phone: <input type="text">
-    <br>
-    Email: <input type="text">
-    <br>
-    Available to Drive:
-    <input type="radio" name="availability" value="yes" checked> Yes
-    <input type="radio" name="availability" value="no"> No <br>
-    Type of car:
-    <select name="car">
-      <option value="car">Car</option>
-      <option value="suv">SUV</option>
-      <option value="truck">Truck</option>
-      <option value="van">Van</option>
-      <option value="minivan">Minivan</option>
-    </select>
-    <br>
-    # of available seats:
-    <select name="seats" id="">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-    </select>
-    <br>
-    My child(children) will utilize carpool:
-    <input type="radio" name="utilize" value="yes" checked> Yes
-    <input type="radio" name="utilize" value="no"> No
-    <br>
-    My child currently (check all that apply):
-    <br>
-    <input type="checkbox" name="current_method" value="car"> Gets driven to school <br>
-    <input type="checkbox" name="current_method" value="schoolBus"> Takes a school bus <br>
-    <input type="checkbox" name="current_method" value="transit"> Takes public transit <br>
-    <input type="checkbox" name="current_method" value="walks"> Walks to school <br>
-    <input type="checkbox" name="current_method" value="cycle"> Cycles to school <br>
-    # of children at school:
-    <select name="seats" id="seats">
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
-    <br>
-    <div id="children_at_school">
-      <div>
-        First Name<input type="text"><br>
-        Last Name <input type="text"><br>
-        School year <input type="text"><br>
-      </div>
-      <button id="add_child" onclick="addChild()">+ Add Child</button>
-    </div>
+    <!--First Row -->
     <div>
-        <a type="submit" href="/views/parentDashboard.html">Submit</a>
+      <div style="float:left;margin-right:10%">
+        <label>FirstName: </label>
+        <input type="text">
+      </div>
+      <div>
+        <label>LastName:</label>
+        <input type="text">
+      </div>
     </div>
+
+    <!-- Second Row-->
+    <div>
+      <div style="float:left;margin-right:10%">
+        <label>Email: </label>
+        <input type="text">
+      </div>
+      <div>
+        <label>Phone:</label>
+        <input type="text">
+      </div>
+    </div>
+
+    <!-- Third Row-->
+    <div>
+      <div style="float:left;margin-right:10%">
+        <label>Available to Carpool:</label>
+        <input type="radio" name="availability" value="yes" checked> Yes
+        <input type="radio" name="availability" value="no"> No <br>
+      </div>
+      <div style="float:left;margin-right:13%">
+        <label>Car Type</label>
+        <select name="car" style="color:#696969">
+          <option value="car">Car</option>
+          <option value="suv">SUV</option>
+          <option value="truck">Truck</option>
+          <option value="van">Van</option>
+          <option value="minivan">Minivan</option>
+          <option value="electronic">Electronic</option>
+        </select>
+      </div>
+      <div>
+        <label># of Seats</label>
+        <select name="seats" id="">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Five Row-->
+    <div>
+      <div style="float:left;margin-right:10%">
+        <label>Need to Carpool:</label>
+        <input type="radio" name="availability" value="yes" checked> Yes
+        <input type="radio" name="availability" value="no"> No <br>
+      </div>
+      <div style="float:left;margin-right:10%">
+        <label>My Child Currently:</label>
+        <select name="car" style="color:#696969">
+          <option value="School Bus">School Bus</option>
+          <option value="Car">Car</option>
+          <option value="public transit">Public Transit</option>
+          <option value="walk">Walk</option>
+          <option value="bicycle">Bicycle</option>
+        </select>
+      </div>
+      <div>
+        <label># of Children</label>
+        <select name="seats" id="">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Six Row-->
+    <div>
+      <div>
+        <a onclick="addChild('child_Info', '')">Add Child Info</a>
+      </div>  
+      <div id="child_Info" hidden>
+        <form>
+          <div>
+            <label>Name:</label>
+            <input type="text">
+          </div>
+          <div>
+            <label>School:</label>
+            <input type="text">
+          </div>
+          <div>
+            <label>Year:</label>
+            <input type="text">
+          </div>
+        </form>
+        <a onclick="addChild('child_Info', 'submit')">Submit</a>
+      </div>
+    </div>
+    <!-- End -->
   </form>
 </div>
+
+<script>
+  function addChild(id_name, id_name2)
+  {
+      var x = document.getElementById(id_name);
+      if (x.hasAttribute("hidden")){
+          x.removeAttribute("hidden");
+      } else {
+          var att = document.createAttribute("hidden");
+          x.setAttributeNode(att);
+      }
+
+      if (id_name2 == "submit") {
+        alert("Register Successfully!");
+      }  
+  }
+</script>
 
 </body>
 </html>
