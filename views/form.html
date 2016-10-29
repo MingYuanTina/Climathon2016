@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
 <style>
 body {
   background-color: #075a96;
 }
 
-input[type=text], select {
-    padding: 12px 20px;
-    margin: 8px 0;
-    font-size:20px;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
 
 div {
   border-radius: 5px;
@@ -35,7 +28,6 @@ button,a {
   -webkit-border-radius: 28;
   -moz-border-radius: 28;
   border-radius: 10px;
-  text-shadow: 0px 1px 2px #080308;
   font-family: Arial;
   color: #e4e4ed;
   font-size: 20px;
@@ -45,119 +37,123 @@ button,a {
 
 </style>
 <body>
-<div  style="margin-top:3%;margin-left:15%;width:60%">
+<div class="container">
   <form action="action_page.php">
-    <label style="font-size:25px; margin:40%; display: inline">Profile Info</label>
-
+    <h2 class="text-center">Profile Info</h2>
     <!--First Row -->
-    <div>
-      <div style="float:left;margin-right:10%">
-        <label>FirstName: </label>
-        <input type="text">
+      <div class="form-group col-sm-6">
+        <label for="firstname" class="col-sm-12">FirstName: </label>
+        <input name="firstname" type="text" class="form-control">
       </div>
-      <div>
-        <label>LastName:</label>
-        <input type="text">
+
+      <div class="form-group col-sm-6">
+        <label for="lastname" class="col-sm-12">LastName:</label>
+        <input type="text" name="lastname" class="form-control">
       </div>
-    </div>
 
     <!-- Second Row-->
-    <div>
-      <div style="float:left;margin-right:10%">
-        <label>Email: </label>
-        <input type="text">
-      </div>
-      <div>
-        <label>Phone:</label>
-        <input type="text">
-      </div>
+    <div class="form-group col-sm-6">
+      <label for="email" class="col-sm-12">Email: </label>
+      <input name="email" type="text" class="form-control">
+    </div>
+
+    <div class="form-group col-sm-6">
+      <label for="phone" class="col-sm-12">Phone Number:</label>
+      <input type="text" name="phone" class="form-control">
     </div>
 
     <!-- Third Row-->
-    <div>
-      <div style="float:left;margin-right:10%">
-        <label>Available to Carpool:</label>
-        <input type="radio" name="availability" value="yes" checked> Yes
-        <input type="radio" name="availability" value="no"> No <br>
-      </div>
-      <div style="float:left;margin-right:13%">
-        <label>Car Type</label>
-        <select name="car" style="color:#696969">
-          <option value="car">Car</option>
-          <option value="suv">SUV</option>
-          <option value="truck">Truck</option>
-          <option value="van">Van</option>
-          <option value="minivan">Minivan</option>
-          <option value="electronic">Electronic</option>
-        </select>
-      </div>
-      <div>
-        <label># of Seats</label>
-        <select name="seats" id="">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
-      </div>
+    <div class="col-sm-12">
+    <div class="form-group col-sm-4">
+      <h3>Available to Carpool</h3>
+      <label class="radio-inline"><input type="radio"  name= class="form-group""availability" value="yes" checked>Yes</label>
+      <label class="radio-inline"><input type="radio"  name="availability" value="no">no</label>
     </div>
 
-    <!-- Five Row-->
-    <div>
-      <div style="float:left;margin-right:10%">
-        <label>Need to Carpool:</label>
-        <input type="radio" name="availability" value="yes" checked> Yes
-        <input type="radio" name="availability" value="no"> No <br>
-      </div>
-      <div style="float:left;margin-right:10%">
-        <label>My Child Currently:</label>
-        <select name="car" style="color:#696969">
-          <option value="School Bus">School Bus</option>
-          <option value="Car">Car</option>
-          <option value="public transit">Public Transit</option>
-          <option value="walk">Walk</option>
-          <option value="bicycle">Bicycle</option>
-        </select>
-      </div>
-      <div>
-        <label># of Children</label>
-        <select name="seats" id="">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-        </select>
-      </div>
+
+    <div class="form-group col-sm-4">
+      <label for="car">Car Type</label>
+      <select id="car" style="color:#696969" class="form-control">
+        <option value="car">Car</option>
+        <option value="suv">SUV</option>
+        <option value="truck">Truck</option>
+        <option value="van">Van</option>
+        <option value="minivan">Minivan</option>
+        <option value="electronic">Electronic</option>
+      </select>
     </div>
+
+    <div class="form-group col-sm-4">
+      <label># of Seats</label>
+      <select name="seats" id="" class="form-control">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+    </div>
+  </div>
+
+    <!-- row 4 -->
+
+    <div class="form-group col-sm-4">
+      <h3>Need To Carpool</h3>
+        <label class="radio-inline"><input type="radio"  name="needtocarpool" value="yes" checked>Yes</label>
+        <label class="radio-inline"><input type="radio" name="needtocarpool" value="no">no</label>
+    </div>
+
+
+    <div class="form-group col-sm-4">
+      <label>My Child Currently:</label>
+      <select name="car" style="color:#696969" class="form-control">
+        <option value="School Bus">School Bus</option>
+        <option value="Car">Car</option>
+        <option value="public transit">Public Transit</option>
+        <option value="walk">Walk</option>
+        <option value="bicycle">Bicycle</option>
+      </select>
+    </div>
+
+    <div class="form-group col-sm-4">
+      <label># of Children</label>
+      <select name="seats" id="" class="form-control">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+    </div>
+
 
     <!-- Six Row-->
-    <div>
-      <div>
-        <a onclick="addChild('child_Info', '')">Add Child Info</a>
-      </div>  
-      <div id="child_Info" hidden>
-        <form>
-          <div>
-            <label>Name:</label>
-            <input type="text">
-          </div>
-          <div>
-            <label>School:</label>
-            <input type="text">
-          </div>
-          <div>
-            <label>Year:</label>
-            <input type="text">
-          </div>
-        </form>
-        <a onclick="addChild('child_Info', 'submit')">Submit</a>
-      </div>
+    <div class="col-sm-12">
+    <div class="form-group col-sm-3">
+        <a class="btn btn-primary" style="font-size:18xpx;" onclick="addChild('child_Info', '')" >Add Child Info</a>
     </div>
+    <div id="child_Info"  hidden class="col-sm-9">
+        <form class="form-inline">
+            <div class="form-group col-sm-6">
+                <label>Name:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-sm-6">
+                <label>School:</label>
+                <input type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <a class="btn btn-primary" onclick="addChild('child_Info', 'submit')">Submit</a>
+            </div>
+
+          </form>
+    </div>
+  </div>
     <!-- End -->
+
+    <h1 class="btn btn-primary col-sm-12" style="font-size:25px;">Submit Profile</h1>
   </form>
 </div>
 
@@ -174,7 +170,7 @@ button,a {
 
       if (id_name2 == "submit") {
         alert("Register Successfully!");
-      }  
+      }
   }
 </script>
 
