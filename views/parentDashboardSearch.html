@@ -112,10 +112,11 @@ div[class="link"]:hover
                         <directions draggable="false"
                             travel-mode="DRIVING"
                             panel="{{dir.panelName}}"
-                            origin="{{origin}}"
-                            destination="{{destination}}">
+                            origin="{{startLoc}}"
+                            destination="{{destination.latLng}}">
                         </directions>
-                        <marker ng-repeat="p in destArr" position="{{p}}" on-click="selectDest()"></marker>
+                        <marker ng-show="p.show" ng-repeat="p in destArr" position="{{p.latLng}}" on-click="selectDest(p)"></marker>
+                        <marker ng-show="{{q.show}}" ng-repeat="q in routeList" position="{{p.startLoc}}" on-click="selectStart()"></marker>
                     </ng-map>
                 </div>
 
