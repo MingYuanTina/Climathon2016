@@ -1,2 +1,6 @@
 # npm packages
 node_modules/
+
+# mac files
+._*
+.DS_Store
