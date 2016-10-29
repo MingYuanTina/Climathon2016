@@ -24,7 +24,7 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
     $scope.origin = "current-position";
     $scope.startLoc = []; // user's position according to browser
     $scope.departLoc = {}; // user's selected departure location for the route
-    $scope.showDirections = false;
+    $scope.directions = [];
 
     NavigatorGeolocation.getCurrentPosition().then(function(position) {
         $scope.startLoc = [position.coords.latitude, position.coords.longitude];
@@ -94,7 +94,7 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
         for (var routeElem in allDepartArr) {
             if (Object.keys($scope.destination).length !== 0 &&
                 (Object.keys($scope.departLoc).length === 0 ||
-                allDepartArr[routeElem] == $scope.departLoc));
+                allDepartArr[routeElem].startLoc == $scope.departLoc))
             newArray.push(allDepartArr[routeElem]);
         }
         $scope.routeList = newArray;
@@ -102,6 +102,23 @@ function($scope, DropOffLocnService, $http, NavigatorGeolocation) {
 
     $scope.clearDest = function() {
         $scope.destination = {};
+        showHideDest();
+        showHideDepart();
+    };
+
+    $scope.selectStart = function(e, startMarker) {
+        $scope.departLoc = startMarker.startLoc;
+        showHideDepart();
+        $scope.directions = [];
+        $scope.directions.push({
+            startLoc: startMarker.startLoc,
+            destLoc: startMarker.destLoc
+        });
+    };
+
+    $scope.clearStart = function() {
+        $scope.departLoc = {};
+        $scope.directions = [];
         showHideDest();
         showHideDepart();
     };
